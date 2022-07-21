@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Dependencies\Dependencies.csproj" />
+		<ProjectReference Include="..\..\application\Application\Application.csproj" />
 		<ProjectReference Include="..\Repository.Cache.Redis\Repository.Cache.Redis.csproj" />
 		<ProjectReference Include="..\Repository.Cache\Repository.Cache.csproj" />
 	</ItemGroup>

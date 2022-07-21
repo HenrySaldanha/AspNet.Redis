@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Application.IServices;
+using Application.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository.Cache;
 using Repository.Cache.Redis;
@@ -11,7 +13,7 @@ public static class DependencyInjection
 
     public static void RegisterServices(this IServiceCollection services)
     {
-      //  services.AddScoped<IService, Service>();
+        services.AddScoped<IFibonacciSequenceService, FibonacciSequenceService>();
     }
 
     public static void RegisterRepositories(this IServiceCollection services)
@@ -20,11 +22,6 @@ public static class DependencyInjection
     }
 
     public static void RegisterRedis(this IServiceCollection services, IConfiguration configuration)
-    {
-        services.AddSingleton<ICacheRepository, DistributedCacheRedis>();
-    }
-
-    public static void RegisterOptions(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddStackExchangeRedisCache(options =>
         {
