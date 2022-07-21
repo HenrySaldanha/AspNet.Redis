@@ -1,10 +1,8 @@
-﻿namespace Application.Options;
+﻿namespace Application.Helpers;
 public static class KeysHelper
 {
-    private const string FIBONACCI = $"FIBONACCI";
-
-    public static string GetFibonacciKey(int n)
+    public static string GetFibonacciKey(uint n)
     {
-        return $"{FIBONACCI}:{n}";
+        return $"FIBONACCI:{n}";
     }
 }
