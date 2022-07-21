@@ -1,5 +1,7 @@
-﻿namespace Application.IServices;
+﻿using System.Numerics;
+
+namespace Application.IServices;
 public interface IFibonacciSequenceService
 {
-    public Task<long> GetFibbonacciNumberAsync(int n);
+    public Task<string> GetFibbonacciNumberAsync(uint n);
 }

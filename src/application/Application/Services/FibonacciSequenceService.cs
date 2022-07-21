@@ -1,6 +1,8 @@
-﻿using Application.IServices;
-using Application.Options;
+﻿using Application.Helpers;
+using Application.IServices;
 using Repository.Cache;
+using Serilog;
+using System.Numerics;
 
 namespace Application.Services;
 public class FibonacciSequenceService : IFibonacciSequenceService
@@ -12,20 +14,26 @@ public class FibonacciSequenceService : IFibonacciSequenceService
         _cache = cache;
     }
 
-    public async Task<long> GetFibbonacciNumberAsync(int n)
+    public async Task<string> GetFibbonacciNumberAsync(uint n)
     {
+        Log.Information("Service: {0} Method: {1} Request: {2}",
+            nameof(FibonacciSequenceService), nameof(GetFibbonacciNumberAsync), n);
+
         if (n <= 1)
-            return n;
+            return n.ToString();
 
         var key = KeysHelper.GetFibonacciKey(n);
-        var cacheNumber = await _cache.GetAsync<long?>(key);
+        var cacheNumber = await _cache.GetAsync<string>(key);
 
-        if (cacheNumber.HasValue)
-            return cacheNumber.Value;
+        if (cacheNumber != null)
+            return cacheNumber;
 
-        cacheNumber = await GetFibbonacciNumberAsync(n - 1) + await GetFibbonacciNumberAsync(n - 2);
-        await _cache.AddAsync(key, cacheNumber.Value);
+        var prevNumber = BigInteger.Parse(await GetFibbonacciNumberAsync(n - 1));
+        var prevPrevNumber = BigInteger.Parse(await GetFibbonacciNumberAsync(n - 2));
 
-        return cacheNumber.Value;
+        var sum = prevNumber + prevPrevNumber;
+        await _cache.AddAsync(key, sum.ToString());
+
+        return sum.ToString();
     }
 }
