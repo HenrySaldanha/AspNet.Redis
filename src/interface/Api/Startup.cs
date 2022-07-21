@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DependencyInjection;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api;
 public class Startup
@@ -30,6 +31,8 @@ public class Startup
         services.ConfigureOptions<ConfigureSwaggerOptions>();
         services.AddSwaggerGen().AddSwaggerGenNewtonsoftSupport();
         services.AddRouting(options => options.LowercaseUrls = true);
+        services.RegisterRedis(Configuration);
+        services.RegisterRepositories();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
