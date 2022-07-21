@@ -1,4 +1,5 @@
-﻿using Application.IServices;
+﻿using Api.Models.Response;
+using Application.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -17,10 +18,10 @@ public class FibonacciSequenceController : ControllerBase
     }
 
     [HttpGet("{number}")]
-    [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
-    public async Task<long> GetSequenceNumber([FromRoute] int number)
+    [ProducesResponseType(typeof(FibonacciNumberResponse), StatusCodes.Status200OK)]
+    public async Task<ActionResult> GetSequenceNumber([FromRoute] uint number)
     {
-        //TODO: Json Response
-        return await _service.GetFibbonacciNumberAsync(number);
+        var responseNumber = await _service.GetFibbonacciNumberAsync(number);
+        return Ok(new FibonacciNumberResponse(responseNumber));
     }
 }
