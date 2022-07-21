@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F4F146F0-AD29-4E8D-881B-9446AE87206D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C9A51CBB-4A89-4092-BCD1-60664CE0542D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C9A51CBB-4A89-4092-BCD1-60664CE0542D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application", "{70594164-42E4-41E1-8449-A26432287D2A}"
 EndProject
@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "interface", "interface", "{87E41D6A-34D0-4D7C-A0A1-84C537C27B0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "src\interface\Api\Api.csproj", "{6EAC0480-BF30-43CB-A13A-C6A7A799BC0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "src\interface\Api\Api.csproj", "{6EAC0480-BF30-43CB-A13A-C6A7A799BC0D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{6ED61E07-6E12-47B3-B893-633C22C9E3C3}"
 	ProjectSection(SolutionItems) = preProject
@@ -32,15 +32,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Cache", "src\infra\Repository.Cache\Repository.Cache.csproj", "{868B85F3-DD15-4C5D-B5D7-6C3C7474371F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.Cache", "src\infra\Repository.Cache\Repository.Cache.csproj", "{868B85F3-DD15-4C5D-B5D7-6C3C7474371F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Cache.Redis", "src\infra\Repository.Cache.Redis\Repository.Cache.Redis.csproj", "{65032281-C40E-4524-864F-C2486871E269}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.Cache.Redis", "src\infra\Repository.Cache.Redis\Repository.Cache.Redis.csproj", "{65032281-C40E-4524-864F-C2486871E269}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection", "src\infra\DependencyInjection\DependencyInjection.csproj", "{3A144C08-DB17-40D2-8526-B91EF1C9CCB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjection", "src\infra\DependencyInjection\DependencyInjection.csproj", "{3A144C08-DB17-40D2-8526-B91EF1C9CCB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dependencies", "src\infra\Dependencies\Dependencies.csproj", "{D7866E46-A0EC-48B9-840E-BE0827C7C28B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dependencies", "src\infra\Dependencies\Dependencies.csproj", "{D7866E46-A0EC-48B9-840E-BE0827C7C28B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\application\Application\Application.csproj", "{7528DFFD-2639-4656-9606-D8307DFFB8BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\application\Application\Application.csproj", "{7528DFFD-2639-4656-9606-D8307DFFB8BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Test", "test\application\Application.Test\Application.Test.csproj", "{1A14F959-7691-4D67-AB3C-B9C8C5D74BCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Cache.Redis.Test", "test\infra\Repository.Cache.Redis.Test\Repository.Cache.Redis.Test.csproj", "{E4DB3921-7EA0-4808-94C6-B83D66018778}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +76,14 @@ Global
 		{7528DFFD-2639-4656-9606-D8307DFFB8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7528DFFD-2639-4656-9606-D8307DFFB8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7528DFFD-2639-4656-9606-D8307DFFB8BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A14F959-7691-4D67-AB3C-B9C8C5D74BCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A14F959-7691-4D67-AB3C-B9C8C5D74BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A14F959-7691-4D67-AB3C-B9C8C5D74BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A14F959-7691-4D67-AB3C-B9C8C5D74BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4DB3921-7EA0-4808-94C6-B83D66018778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4DB3921-7EA0-4808-94C6-B83D66018778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4DB3921-7EA0-4808-94C6-B83D66018778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4DB3921-7EA0-4808-94C6-B83D66018778}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +103,8 @@ Global
 		{3A144C08-DB17-40D2-8526-B91EF1C9CCB2} = {A8F8338A-E6B0-4950-B48E-C2954FDEAFDA}
 		{D7866E46-A0EC-48B9-840E-BE0827C7C28B} = {A8F8338A-E6B0-4950-B48E-C2954FDEAFDA}
 		{7528DFFD-2639-4656-9606-D8307DFFB8BB} = {70594164-42E4-41E1-8449-A26432287D2A}
+		{1A14F959-7691-4D67-AB3C-B9C8C5D74BCD} = {460AAE1C-03F1-4341-B6F4-4006D38600D7}
+		{E4DB3921-7EA0-4808-94C6-B83D66018778} = {6E6ABA41-3DA5-477E-80E9-4ACC42ACE372}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5460EF74-1426-46F5-A471-30D0C0F09907}

@@ -1,8 +1,13 @@
+using Serilog;
+
 namespace Api;
 public class Program
 {
     public static void Main(string[] args)
     {
+        Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
+        Log.Information("Starting Api");
+
         CreateHostBuilder(args).Build().Run();
     }
 
