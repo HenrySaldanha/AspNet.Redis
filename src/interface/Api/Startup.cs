@@ -33,6 +33,7 @@ public class Startup
         services.AddRouting(options => options.LowercaseUrls = true);
         services.RegisterRedis(Configuration);
         services.RegisterRepositories();
+        services.RegisterServices();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
