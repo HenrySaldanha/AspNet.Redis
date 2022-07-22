@@ -22,7 +22,7 @@ public class IndicatorsServiceTests
         var value = "value";
 
         //Act
-        var itemCreated = await _service.CreateAsync(key, value);
+        var itemCreated = await _service.InsertOrUpdateAsync(key, value);
 
         //Assert
         Assert.Equal((key,value), itemCreated);
@@ -40,7 +40,7 @@ public class IndicatorsServiceTests
         //Act
         //Assert
         await Assert.ThrowsAsync<Exception>(async () => {
-            await _service.CreateAsync(key, value);
+            await _service.InsertOrUpdateAsync(key, value);
         });
         _cache.Verify(c => c.AddAsync(key, value, TimeSpan.FromDays(1), null), Times.Once);
     }
