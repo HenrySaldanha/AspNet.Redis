@@ -1,5 +1,6 @@
 ﻿using DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace Api;
 public class Startup
@@ -29,7 +30,12 @@ public class Startup
         });
 
         services.ConfigureOptions<ConfigureSwaggerOptions>();
-        services.AddSwaggerGen().AddSwaggerGenNewtonsoftSupport();
+        services.AddSwaggerGen(c =>
+        {
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            c.IncludeXmlComments(xmlPath);
+        }).AddSwaggerGenNewtonsoftSupport();
         services.AddRouting(options => options.LowercaseUrls = true);
         services.RegisterRedis(Configuration);
         services.RegisterRepositories();
