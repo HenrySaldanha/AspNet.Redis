@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Api.Models.Response;
+using Application.IServices;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
@@ -8,20 +10,37 @@ namespace Api.Controllers;
 [Route("v{version:apiVersion}/[controller]")]
 public class GithubMetricsController : ControllerBase
 {
+    /// <summary>
+    /// Get the 5 latest repositories (the cache is refreshed every 1 week)
+    /// </summary>
+    /// <param name="userName"> User name for search in github </param>
     [HttpGet("latestrepositories/{userName}")]
-    //[ProducesResponseType(typeof(type), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<GitHubRepositoryResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> GetLatestRepositories([FromRoute] string userName)
+    public async Task<ActionResult> GetLatestRepositoriesAsync([FromServices] IGithubService service, [FromRoute] string userName)
     {
-        throw new NotImplementedException();
+        var response = await service.GetLatestRepositoriesAsync(userName);
+
+        if (response is null)
+            return NotFound();
+
+        return Ok(response.Select(c => (GitHubRepositoryResponse)c));
     }
 
+    /// <summary>
+    /// Get the 5 most starred repositories (the cache is refreshed every 1 week)
+    /// </summary>
+    /// <param name="userName"> User name for search in github </param>
     [HttpGet("moststarredrepository/{userName}")]
-    //[ProducesResponseType(typeof(type), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<GitHubRepositoryResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> GetMostStarredRepository([FromRoute] string userName)
+    public async Task<ActionResult> GetMostStarredRepositoryAsync([FromServices] IGithubService service, [FromRoute] string userName)
     {
-        //github api https://api.github.com/users/{userName}/repos
-        throw new NotImplementedException();
+        var response = await service.GetMostStarredRepositoryAsync(userName);
+
+        if (response is null)
+            return NotFound();
+
+        return Ok(response.Select(c => (GitHubRepositoryResponse)c));
     }
 }
