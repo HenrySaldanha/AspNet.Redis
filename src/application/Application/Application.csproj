@@ -7,8 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\domain\Domain\Domain.csproj" />
 		<ProjectReference Include="..\..\infra\Dependencies\Dependencies.csproj" />
 		<ProjectReference Include="..\..\infra\Repository.Cache\Repository.Cache.csproj" />
+		<ProjectReference Include="..\..\interface\ExternalInterfaces\ExternalInterfaces.csproj" />
 	</ItemGroup>
 
 </Project>
