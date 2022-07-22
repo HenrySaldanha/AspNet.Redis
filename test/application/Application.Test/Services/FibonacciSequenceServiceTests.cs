@@ -23,7 +23,7 @@ public class FibonacciSequenceServiceTests
 
         //Assert
         Assert.Equal("1", fibNumber);
-        _cache.Verify(c => c.AddAsync<string>(It.IsAny<string>(), It.IsAny<string>(), null, null), Times.Never);
+        _cache.Verify(c => c.AddAsync(It.IsAny<string>(), It.IsAny<string>(), null, null), Times.Never);
     }
 
     [Fact]
