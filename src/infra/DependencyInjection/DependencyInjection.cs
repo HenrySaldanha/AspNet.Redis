@@ -14,6 +14,7 @@ public static class DependencyInjection
     public static void RegisterServices(this IServiceCollection services)
     {
         services.AddScoped<IFibonacciSequenceService, FibonacciSequenceService>();
+        services.AddScoped<IIndicatorsService, IndicatorsService>();
     }
 
     public static void RegisterRepositories(this IServiceCollection services)
