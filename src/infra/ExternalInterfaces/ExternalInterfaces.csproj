@@ -8,9 +8,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\domain\Domain\Domain.csproj" />
-		<ProjectReference Include="..\..\infra\Dependencies\Dependencies.csproj" />
-		<ProjectReference Include="..\..\infra\ExternalInterfaces\ExternalInterfaces.csproj" />
-		<ProjectReference Include="..\..\infra\Repository.Cache\Repository.Cache.csproj" />
+		<ProjectReference Include="..\Dependencies\Dependencies.csproj" />
 	</ItemGroup>
 
 </Project>
