@@ -1,14 +1,10 @@
-﻿using System.Numerics;
-
-namespace Api.Models.Response
+﻿namespace Api.Models.Response;
+public class FibonacciNumberResponse
 {
-    public class FibonacciNumberResponse
-    {
-        public string FibonacciNumber { get; set; }
+    public string FibonacciNumber { get; set; }
 
-        public FibonacciNumberResponse(string value)
-        {
-            FibonacciNumber = value;
-        }
+    public FibonacciNumberResponse(string value)
+    {
+        FibonacciNumber = value;
     }
 }
