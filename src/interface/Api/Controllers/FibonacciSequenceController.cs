@@ -17,6 +17,11 @@ public class FibonacciSequenceController : ControllerBase
         _service = service;
     }
 
+    /// <summary>
+    /// Search or calculate the corresponding value in the Fibonacci sequence
+    /// </summary>
+    /// <param name="number"> Input for search, the value must be a positive integer </param>
+
     [HttpGet("{number}")]
     [ProducesResponseType(typeof(FibonacciNumberResponse), StatusCodes.Status200OK)]
     public async Task<ActionResult> GetSequenceNumber([FromRoute] uint number)
