@@ -17,7 +17,7 @@ public class FibonacciSequenceController : ControllerBase
 
     [HttpGet("{number}")]
     [ProducesResponseType(typeof(FibonacciNumberResponse), StatusCodes.Status200OK)]
-    public async Task<ActionResult> GetSequenceNumber([FromServices] IFibonacciSequenceService service, [FromRoute] uint number)
+    public async Task<ActionResult> GetSequenceNumberAsync([FromServices] IFibonacciSequenceService service, [FromRoute] uint number)
     {
         var responseNumber = await service.GetFibbonacciNumberAsync(number);
         return Ok(new FibonacciNumberResponse(responseNumber));
