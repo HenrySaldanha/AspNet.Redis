@@ -19,16 +19,16 @@ public class IndicatorsController : ControllerBase
     }
 
     /// <summary>
-    /// Registers a new indicator in the cache with validity of 1 day
+    /// Registers or update a indicator in the cache with validity of 1 day
     /// </summary>
     /// <param name="request"> Key and value for the indicator </param>
     [HttpPost]
     [ProducesResponseType(typeof(IndicatorResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> CreateAsync([FromBody] IndicatorRequest request)
+    public async Task<ActionResult> InsertOrUpdateAsync([FromBody] IndicatorRequest request)
     {
-        var response = await _service.CreateAsync(request.Key, request.Value);
-        return Created(nameof(CreateAsync), new IndicatorResponse(response));
+        var response = await _service.InsertOrUpdateAsync(request.Key, request.Value);
+        return Created(nameof(InsertOrUpdateAsync), new IndicatorResponse(response));
     }
 
     /// <summary>
