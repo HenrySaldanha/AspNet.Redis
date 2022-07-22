@@ -12,10 +12,10 @@ public class IndicatorsService : IIndicatorsService
         _cache = cache;
     }
 
-    public async Task<(string, string)> CreateAsync(string key, string value)
+    public async Task<(string, string)> InsertOrUpdateAsync(string key, string value)
     {
         Log.Information("Service: {0} Method: {1} Request: {2}",
-            nameof(IndicatorsService), nameof(CreateAsync), new { key, value });
+            nameof(IndicatorsService), nameof(InsertOrUpdateAsync), new { key, value });
 
         try
         {
