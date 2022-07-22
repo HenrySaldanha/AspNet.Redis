@@ -1,8 +1,11 @@
 ﻿using DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace Api;
+
+[ExcludeFromCodeCoverage]
 public class Startup
 {
     public IConfiguration Configuration { get; }

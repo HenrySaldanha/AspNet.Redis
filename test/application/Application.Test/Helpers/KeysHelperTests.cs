@@ -16,4 +16,30 @@ public class KeysHelperTests
         //Assert
         Assert.Equal($"FIBONACCI:{n}", key);
     }
+
+    [Fact]
+    public void GetLatestRepositoriesKey_ShouldReturnTheCorrectKey()
+    {
+        //Arrange
+        var user = "test";
+
+        //Act
+        var key = KeysHelper.GetLatestRepositoriesKey(user);
+
+        //Assert
+        Assert.Equal($"GITHUB_LATEST_REPOS:{user}", key);
+    }
+
+    [Fact]
+    public void GetMostStarredRepositoryKey_ShouldReturnTheCorrectKey()
+    {
+        //Arrange
+        var user = "test";
+
+        //Act
+        var key = KeysHelper.GetMostStarredRepositoryKey(user);
+
+        //Assert
+        Assert.Equal($"GITHUB_MOST_STAR_REPOS:{user}", key);
+    }
 }

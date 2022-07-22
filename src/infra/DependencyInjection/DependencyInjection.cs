@@ -4,9 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository.Cache;
 using Repository.Cache.Redis;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DependencyInjection;
 
+[ExcludeFromCodeCoverage]
 public static class DependencyInjection
 {
     private static readonly string PROJECT_NAME = "AspNet.Redis";

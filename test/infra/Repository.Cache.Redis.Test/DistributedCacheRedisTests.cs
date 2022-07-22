@@ -49,6 +49,19 @@ public class DistributedCacheRedisTests
     }
 
     [Fact]
+    public async Task GetAsync_MustNotBeGetData()
+    {
+        //Arrange
+        var key = "key";
+
+        //Act
+        var responseData = await _redis.GetAsync<int>(key);
+
+        //Assert
+        Assert.Equal(default, responseData);
+    }
+
+    [Fact]
     public async Task RemoveAsync_MustBeRemoveKeyAndData()
     {
         //Arrange

@@ -1,6 +1,9 @@
 using Serilog;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Api;
+
+[ExcludeFromCodeCoverage]
 public class Program
 {
     public static void Main(string[] args)
