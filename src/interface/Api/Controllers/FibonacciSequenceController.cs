@@ -10,13 +10,6 @@ namespace Api.Controllers;
 [Route("v{version:apiVersion}/[controller]")]
 public class FibonacciSequenceController : ControllerBase
 {
-    private readonly IFibonacciSequenceService _service;
-
-    public FibonacciSequenceController(IFibonacciSequenceService service)
-    {
-        _service = service;
-    }
-
     /// <summary>
     /// Search or calculate the corresponding value in the Fibonacci sequence
     /// </summary>
@@ -24,9 +17,9 @@ public class FibonacciSequenceController : ControllerBase
 
     [HttpGet("{number}")]
     [ProducesResponseType(typeof(FibonacciNumberResponse), StatusCodes.Status200OK)]
-    public async Task<ActionResult> GetSequenceNumber([FromRoute] uint number)
+    public async Task<ActionResult> GetSequenceNumber([FromServices] IFibonacciSequenceService service, [FromRoute] uint number)
     {
-        var responseNumber = await _service.GetFibbonacciNumberAsync(number);
+        var responseNumber = await service.GetFibbonacciNumberAsync(number);
         return Ok(new FibonacciNumberResponse(responseNumber));
     }
 }
