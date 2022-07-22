@@ -28,11 +28,17 @@ public class GithubService : IGithubService
         if (cacheData is not null)
             return cacheData;
 
-        var repositories = _gitHubApi.GetRepositoriesByUser(userName);
+        var expireTime = TimeSpan.FromDays(7);
+        var repositories = await _gitHubApi.GetRepositoriesByUser(userName);
 
+        if (!repositories.Any())
+            return repositories;
 
-        //TODO: implement this
-        throw new NotImplementedException();
+        repositories = repositories.OrderByDescending(c => c.CreateTime).Take(5);
+
+        await _cache.AddAsync(key, repositories, expireTime);
+
+        return repositories;
     }
 
     public async Task<IEnumerable<GitHubRepository>> GetMostStarredRepositoryAsync(string userName)
@@ -41,13 +47,20 @@ public class GithubService : IGithubService
           nameof(GithubService), nameof(GetMostStarredRepositoryAsync), userName);
 
         var key = KeysHelper.GetMostStarredRepositoryKey(userName);
-
         var cacheData = await _cache.GetAsync<IEnumerable<GitHubRepository>>(key);
-
+        
         if (cacheData is not null)
             return cacheData;
 
-        //TODO: implement this
-        throw new NotImplementedException();
+        var expireTime = TimeSpan.FromDays(7);
+        var repositories = await _gitHubApi.GetRepositoriesByUser(userName);
+        repositories = repositories.OrderByDescending(c => c.Stars).Take(5);
+
+        if (!repositories.Any())
+            return repositories;
+
+        await _cache.AddAsync(key, repositories, expireTime);
+
+        return repositories;
     }
 }
