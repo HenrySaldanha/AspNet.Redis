@@ -48,7 +48,7 @@ public class GithubService : IGithubService
 
         var key = KeysHelper.GetMostStarredRepositoryKey(userName);
         var cacheData = await _cache.GetAsync<IEnumerable<GitHubRepository>>(key);
-        
+
         if (cacheData is not null)
             return cacheData;
 

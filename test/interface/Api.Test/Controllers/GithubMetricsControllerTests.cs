@@ -1,7 +1,6 @@
 ﻿using Api.Controllers;
 using Api.Models.Response;
 using Application.IServices;
-using Application.Services;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,7 +38,7 @@ public class GithubMetricsControllerTests
     {
         //Arrange
         var user = "user";
-        _service.Setup(c => c.GetLatestRepositoriesAsync(user)).ReturnsAsync((List<GitHubRepository>)null);
+        _service.Setup(c => c.GetLatestRepositoriesAsync(user)).ReturnsAsync(new List<GitHubRepository>());
 
         //Act
         var response = await _controller.GetLatestRepositoriesAsync(_service.Object, user);
@@ -71,7 +70,7 @@ public class GithubMetricsControllerTests
     {
         //Arrange
         var user = "user";
-        _service.Setup(c => c.GetMostStarredRepositoryAsync(user)).ReturnsAsync((List<GitHubRepository>)null);
+        _service.Setup(c => c.GetMostStarredRepositoryAsync(user)).ReturnsAsync(new List<GitHubRepository>());
 
         //Act
         var response = await _controller.GetMostStarredRepositoryAsync(_service.Object, user);

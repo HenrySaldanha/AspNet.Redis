@@ -1,5 +1,4 @@
 ﻿using Application.Services;
-using Moq;
 using Repository.Cache;
 
 namespace Application.Test.Services;
@@ -25,7 +24,7 @@ public class IndicatorsServiceTests
         var itemCreated = await _service.InsertOrUpdateAsync(key, value);
 
         //Assert
-        Assert.Equal((key,value), itemCreated);
+        Assert.Equal((key, value), itemCreated);
         _cache.Verify(c => c.AddAsync(key, value, TimeSpan.FromDays(1), null), Times.Once);
     }
 
@@ -39,7 +38,8 @@ public class IndicatorsServiceTests
 
         //Act
         //Assert
-        await Assert.ThrowsAsync<Exception>(async () => {
+        await Assert.ThrowsAsync<Exception>(async () =>
+        {
             await _service.InsertOrUpdateAsync(key, value);
         });
         _cache.Verify(c => c.AddAsync(key, value, TimeSpan.FromDays(1), null), Times.Once);

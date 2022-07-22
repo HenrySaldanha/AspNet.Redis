@@ -1,32 +1,16 @@
 ﻿using Domain;
-using System.Text.Json.Serialization;
 
 namespace ExternalInterfaces.Model;
 
 public class ApiRepositoryResponse
 {
-    //[JsonPropertyName("id")]
     public int Id { get; set; }
-
-    //[JsonPropertyName("name")]
     public string Name { get; set; }
-
-    //[JsonPropertyName("owner")]
     public ApiOwnerResponse Owner { get; set; }
-
-    //[JsonPropertyName("description")]
     public string Description { get; set; }
-
-    //[JsonPropertyName("url")]
     public string Url { get; set; }
-
-    //[JsonPropertyName("created_at")]
     public DateTime Created_at { get; set; }
-
-    //[JsonPropertyName("stargazers_count")]
     public int Stargazers_count { get; set; }
-
-    //[JsonPropertyName("language")]
     public string Language { get; set; }
 
     public static implicit operator GitHubRepository(ApiRepositoryResponse apiModel)
@@ -50,11 +34,8 @@ public class ApiRepositoryResponse
 
 public class ApiOwnerResponse
 {
-    //[JsonPropertyName("login")]
     public string Login { get; set; }
-    //[JsonPropertyName("id")]
     public int Id { get; set; }
-    //[JsonPropertyName("url")]
     public string Url { get; set; }
 
     public static implicit operator RepositoryOwner(ApiOwnerResponse owner)

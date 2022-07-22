@@ -3,7 +3,6 @@ using ExternalInterfaces.Model;
 using Flurl.Http;
 using Serilog;
 using System.Net;
-using System.Text.Json;
 
 namespace ExternalInterfaces;
 public class GitHubApi
@@ -21,7 +20,7 @@ public class GitHubApi
                 .AllowAnyHttpStatus()
                 .GetAsync();
 
-            if(apiResponse.StatusCode == (int)HttpStatusCode.OK)
+            if (apiResponse.StatusCode == (int)HttpStatusCode.OK)
             {
                 var repos = await apiResponse.GetJsonAsync<IEnumerable<ApiRepositoryResponse>>();
                 return repos.Select(c => (GitHubRepository)c);
