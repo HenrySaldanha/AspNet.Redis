@@ -1,18 +1,27 @@
 ﻿using Domain;
 using ExternalInterfaces.Model;
 using Flurl.Http;
+using Microsoft.Extensions.Options;
 using Serilog;
 using System.Net;
 
 namespace ExternalInterfaces;
 public class GitHubApi
 {
+    private readonly GitHubApiOptions _options;
+
+    public GitHubApi(IOptions<GitHubApiOptions> options)
+    {
+        _options = options.Value;
+    }
+
     public async Task<IEnumerable<GitHubRepository>> GetRepositoriesByUser(string userName)
     {
         Log.Debug("Service: {0} Method: {1} Request: {2}",
             nameof(GitHubApi), nameof(GetRepositoriesByUser), userName);
 
-        var url = $"https://api.github.com/users/{userName}/repos";
+        var url = string.Format(_options.GetRepositoriesUrl, userName);
+
         try
         {
             var apiResponse = await url

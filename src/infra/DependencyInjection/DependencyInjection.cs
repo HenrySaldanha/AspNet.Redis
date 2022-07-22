@@ -1,5 +1,6 @@
 ﻿using Application.IServices;
 using Application.Services;
+using ExternalInterfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository.Cache;
@@ -32,5 +33,9 @@ public static class DependencyInjection
             options.Configuration = configuration.GetConnectionString("Redis");
             options.InstanceName = $"{PROJECT_NAME}:";
         });
+    }
+    public static void RegisterOptions(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<GitHubApiOptions>(configuration.GetSection("GitHubApi"));
     }
 }
