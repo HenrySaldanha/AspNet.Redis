@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Api.Models.Request;
+using Api.Models.Response;
+using Application.IServices;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
@@ -8,27 +11,52 @@ namespace Api.Controllers;
 [Route("v{version:apiVersion}/[controller]")]
 public class IndicatorsController : ControllerBase
 {
-    [HttpPost]
-    //[ProducesResponseType(typeof(type), StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> CreateAsync(/*request*/)
+    private readonly IIndicatorsService _service;
+
+    public IndicatorsController(IIndicatorsService service)
     {
-        throw new NotImplementedException();
+        _service = service;
     }
 
+    /// <summary>
+    /// Registers a new indicator in the cache with validity of 1 day
+    /// </summary>
+    /// <param name="request"> Key and value for the indicator </param>
+    [HttpPost]
+    [ProducesResponseType(typeof(IndicatorResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> CreateAsync([FromBody] IndicatorRequest request)
+    {
+        var response = await _service.CreateAsync(request.Key, request.Value);
+        return Created(nameof(CreateAsync), new IndicatorResponse(response));
+    }
+
+    /// <summary>
+    /// Get a registered indicator in the cache
+    /// </summary>
+    /// <param name="key"> Indicator key </param>
     [HttpGet("{key}")]
-    //[ProducesResponseType(typeof(type), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IndicatorResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> GetAsync([FromRoute] string key)
     {
-        throw new NotImplementedException();
+        var value = await _service.GetAsync(key);
+
+        if (value is null)
+            return NotFound();
+
+        return Ok(new IndicatorResponse((key, value)));
     }
 
+    /// <summary>
+    /// Remove a registered indicator in the cache
+    /// </summary>
+    /// <param name="key"> Indicator key </param>
     [HttpDelete("{key}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<ActionResult> DeleteAsync(/*request*/)
+    public async Task<ActionResult> DeleteAsync([FromRoute] string key)
     {
-        throw new NotImplementedException();
+        await _service.DeleteAsync(key);
+        return NoContent();
     }
-
 }
