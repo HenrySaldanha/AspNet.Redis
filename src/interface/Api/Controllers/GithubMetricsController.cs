@@ -21,7 +21,7 @@ public class GithubMetricsController : ControllerBase
     {
         var response = await service.GetLatestRepositoriesAsync(userName);
 
-        if (response is null)
+        if (!response.Any())
             return NotFound();
 
         return Ok(response.Select(c => (GitHubRepositoryResponse)c));
@@ -38,7 +38,7 @@ public class GithubMetricsController : ControllerBase
     {
         var response = await service.GetMostStarredRepositoryAsync(userName);
 
-        if (response is null)
+        if (!response.Any())
             return NotFound();
 
         return Ok(response.Select(c => (GitHubRepositoryResponse)c));
