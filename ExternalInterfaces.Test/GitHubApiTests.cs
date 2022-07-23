@@ -53,6 +53,24 @@ public class GitHubApiTests
     }
 
     [Fact]
+    public async Task GetRepositoriesByUserAsync_MustReturnEmptyList()
+    {
+        //Arrange
+        var user = "user";
+        var url = "http://url/user/repos";
+
+        //Act
+        using var httpTest = new HttpTest();
+        httpTest.ForCallsTo(url).RespondWithJson(null, 404);
+
+        var repos = await _api.GetRepositoriesByUserAsync(user);
+
+        //Assert
+        httpTest.ShouldHaveCalled(url).WithVerb(HttpMethod.Get);
+        Assert.IsAssignableFrom<IEnumerable<GitHubRepository>>(repos);
+    }
+
+    [Fact]
     public async Task GetRepositoriesByUser_MustReturnException()
     {
         //Arrange
