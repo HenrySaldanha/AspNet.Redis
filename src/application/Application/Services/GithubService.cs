@@ -9,12 +9,12 @@ namespace Application.Services;
 public class GithubService : IGithubService
 {
     private readonly ICacheRepository _cache;
-    private readonly GitHubApi _gitHubApi;
+    private readonly IGitHubApi _gitHubApi;
 
-    public GithubService(ICacheRepository cache)
+    public GithubService(ICacheRepository cache, IGitHubApi gitHubApi)
     {
         _cache = cache;
-        _gitHubApi = new GitHubApi();
+        _gitHubApi = gitHubApi;
     }
 
     public async Task<IEnumerable<GitHubRepository>> GetLatestRepositoriesAsync(string userName)
@@ -29,7 +29,7 @@ public class GithubService : IGithubService
             return cacheData;
 
         var expireTime = TimeSpan.FromDays(7);
-        var repositories = await _gitHubApi.GetRepositoriesByUser(userName);
+        var repositories = await _gitHubApi.GetRepositoriesByUserAsync(userName);
 
         if (!repositories.Any())
             return repositories;
@@ -53,7 +53,7 @@ public class GithubService : IGithubService
             return cacheData;
 
         var expireTime = TimeSpan.FromDays(7);
-        var repositories = await _gitHubApi.GetRepositoriesByUser(userName);
+        var repositories = await _gitHubApi.GetRepositoriesByUserAsync(userName);
         repositories = repositories.OrderByDescending(c => c.Stars).Take(5);
 
         if (!repositories.Any())

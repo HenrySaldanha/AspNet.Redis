@@ -19,6 +19,7 @@ public static class DependencyInjection
         services.AddScoped<IFibonacciSequenceService, FibonacciSequenceService>();
         services.AddScoped<IIndicatorsService, IndicatorsService>();
         services.AddScoped<IGithubService, GithubService>();
+        services.AddScoped<IGitHubApi, GitHubApi>();
     }
 
     public static void RegisterRepositories(this IServiceCollection services)
