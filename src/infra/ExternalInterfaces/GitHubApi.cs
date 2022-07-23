@@ -6,7 +6,7 @@ using Serilog;
 using System.Net;
 
 namespace ExternalInterfaces;
-public class GitHubApi
+public class GitHubApi : IGitHubApi
 {
     private readonly GitHubApiOptions _options;
 
@@ -15,10 +15,10 @@ public class GitHubApi
         _options = options.Value;
     }
 
-    public async Task<IEnumerable<GitHubRepository>> GetRepositoriesByUser(string userName)
+    public async Task<IEnumerable<GitHubRepository>> GetRepositoriesByUserAsync(string userName)
     {
         Log.Debug("Service: {0} Method: {1} Request: {2}",
-            nameof(GitHubApi), nameof(GetRepositoriesByUser), userName);
+            nameof(GitHubApi), nameof(GetRepositoriesByUserAsync), userName);
 
         var url = string.Format(_options.GetRepositoriesUrl, userName);
 

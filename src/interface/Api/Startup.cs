@@ -41,6 +41,7 @@ public class Startup
         }).AddSwaggerGenNewtonsoftSupport();
         services.AddRouting(options => options.LowercaseUrls = true);
         services.RegisterRedis(Configuration);
+        services.RegisterOptions(Configuration);
         services.RegisterRepositories();
         services.RegisterServices();
     }
