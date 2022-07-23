@@ -27,15 +27,15 @@ public class GithubService : IGithubService
 
         if (cacheData is not null)
             return cacheData;
-
-        var expireTime = TimeSpan.FromDays(7);
+        
         var repositories = await _gitHubApi.GetRepositoriesByUserAsync(userName);
 
         if (!repositories.Any())
             return repositories;
-
+       
         repositories = repositories.OrderByDescending(c => c.CreateTime).Take(5);
 
+        var expireTime = TimeSpan.FromDays(7);
         await _cache.AddAsync(key, repositories, expireTime);
 
         return repositories;
@@ -51,14 +51,14 @@ public class GithubService : IGithubService
 
         if (cacheData is not null)
             return cacheData;
-
-        var expireTime = TimeSpan.FromDays(7);
+        
         var repositories = await _gitHubApi.GetRepositoriesByUserAsync(userName);
         repositories = repositories.OrderByDescending(c => c.Stars).Take(5);
 
         if (!repositories.Any())
             return repositories;
 
+        var expireTime = TimeSpan.FromDays(7);
         await _cache.AddAsync(key, repositories, expireTime);
 
         return repositories;
