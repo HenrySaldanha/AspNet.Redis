@@ -73,17 +73,17 @@ public class Startup
         app.UseHealthChecks("/health-check",
             new HealthCheckOptions
             {
-                ResponseWriter = async (context, report) =>
+                ResponseWriter = async (context, healthReport) =>
                 {
                     var result = JsonSerializer.Serialize(
                     new
                     {
-                        currentTime = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"),
-                        statusApplication = report.Status.ToString(),
-                        healthChecks = report.Entries.Select(c=> new
+                        time = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"),
+                        status = healthReport.Status.ToString(),
+                        healthChecks = healthReport.Entries.Select(c => new
                         {
                             check = c.Key,
-                            status = Enum.GetName(typeof(HealthStatus),c.Value.Status)
+                            status = Enum.GetName(typeof(HealthStatus), c.Value.Status)
                         })
                     });
 
@@ -92,13 +92,13 @@ public class Startup
                 }
             });
 
-        app.UseHealthChecks("/healthchecks-data-ui", new HealthCheckOptions
+        app.UseHealthChecks("/health-checks-ui", new HealthCheckOptions
         {
             Predicate = _ => true,
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
 
-        app.UseHealthChecksUI(o => o.UIPath = "/monitor");
+        app.UseHealthChecksUI(o => o.UIPath = "/status");
 
         if (env.IsDevelopment())
             app.UseDeveloperExceptionPage();
