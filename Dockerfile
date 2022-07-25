@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 WORKDIR /source
 COPY . .
-RUN dotnet restore "./src/interface/Api/Api.csproj" --disable-parallel
+RUN dotnet restore "./src/interface/Api/Api.csproj" 
 RUN dotnet publish "./src/interface/Api/Api.csproj" -c release -o /app --no-restore
 
 

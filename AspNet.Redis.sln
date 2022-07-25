@@ -27,7 +27,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "src\interface\Api\Ap
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{6ED61E07-6E12-47B3-B893-633C22C9E3C3}"
 	ProjectSection(SolutionItems) = preProject
-		docker-compose.yml = docker-compose.yml
 		Dockerfile = Dockerfile
 		README.md = README.md
 	EndProjectSection
@@ -52,7 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Test", "test\interface\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalInterfaces", "src\infra\ExternalInterfaces\ExternalInterfaces.csproj", "{D395549D-F3ED-4C67-B89E-1107B42C5AE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalInterfaces.Test", "ExternalInterfaces.Test\ExternalInterfaces.Test.csproj", "{61CFA988-C655-49BC-944D-C82BC92E87EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalInterfaces.Test", "ExternalInterfaces.Test\ExternalInterfaces.Test.csproj", "{61CFA988-C655-49BC-944D-C82BC92E87EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

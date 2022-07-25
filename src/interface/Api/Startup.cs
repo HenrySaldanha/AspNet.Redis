@@ -14,6 +14,7 @@ namespace Api;
 public class Startup
 {
     public IConfiguration Configuration { get; }
+    private static readonly string PROJECT_NAME = "AspNet.Redis";
 
     public Startup(IConfiguration configuration)
     {
@@ -37,7 +38,6 @@ public class Startup
             setup.SubstituteApiVersionInUrl = true;
         });
 
-        //add this in dependency injection
         services.ConfigureOptions<ConfigureSwaggerOptions>();
         services.AddSwaggerGen(c =>
         {
@@ -46,16 +46,19 @@ public class Startup
             c.IncludeXmlComments(xmlPath);
         }).AddSwaggerGenNewtonsoftSupport();
 
-        //add this in dependency injection
         services.AddHealthChecks()
             .AddRedis(Configuration.GetConnectionString("Redis"), name: "redis");
 
-        //add this in dependency injection
         services.AddHealthChecksUI()
             .AddInMemoryStorage();
 
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = Configuration.GetConnectionString("Redis");
+            options.InstanceName = $"{PROJECT_NAME}:";
+        });
+
         services.AddRouting(options => options.LowercaseUrls = true);
-        services.RegisterRedis(Configuration);
         services.RegisterOptions(Configuration);
         services.RegisterRepositories();
         services.RegisterServices();
@@ -67,7 +70,6 @@ public class Startup
         app.UseApiVersioning();
         app.UseSwaggerUI(c => { c.SwaggerEndpoint("v1/swagger.json", "v1"); });
 
-        //add this in dependency injection
         app.UseHealthChecks("/health-check",
             new HealthCheckOptions
             {
@@ -90,16 +92,13 @@ public class Startup
                 }
             });
 
-        //add this in dependency injection
         app.UseHealthChecks("/healthchecks-data-ui", new HealthCheckOptions
         {
             Predicate = _ => true,
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
 
-        //add this in dependency injection
         app.UseHealthChecksUI(o => o.UIPath = "/monitor");
-
 
         if (env.IsDevelopment())
             app.UseDeveloperExceptionPage();
