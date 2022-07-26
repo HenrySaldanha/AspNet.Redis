@@ -92,7 +92,7 @@ public class Startup
                 }
             });
 
-        app.UseHealthChecks("/health-checks-ui", new HealthCheckOptions
+        app.UseHealthChecks("/health-checks-with-response", new HealthCheckOptions
         {
             Predicate = _ => true,
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
