@@ -193,11 +193,8 @@ The final **appsettings.json** file looks like this, after configuring Redis and
       }
     }
 
-## 2.2 Run App
-
-
-
-
+## Give a Star 
+If you found this Implementation helpful or used it in your Projects, do give it a star. Thanks!
 
 ## This project was built with
 * [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
@@ -206,9 +203,6 @@ The final **appsettings.json** file looks like this, after configuring Redis and
 * [Redis](https://redis.io/)
 * [Flurl](https://flurl.dev/)
 * [Health Check](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)
-
-## Give a Star 
-If you found this Implementation helpful or used it in your Projects, do give it a star. Thanks!
 
 ## My contacts
 * [LinkedIn](https://www.linkedin.com/in/henry-saldanha-3b930b98/)
