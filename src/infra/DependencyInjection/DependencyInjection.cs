@@ -12,21 +12,24 @@ namespace DependencyInjection;
 [ExcludeFromCodeCoverage]
 public static class DependencyInjection
 {
-    public static void RegisterServices(this IServiceCollection services)
+    public static IServiceCollection RegisterServices(this IServiceCollection services)
     {
         services.AddScoped<IFibonacciSequenceService, FibonacciSequenceService>();
         services.AddScoped<IIndicatorsService, IndicatorsService>();
         services.AddScoped<IGithubService, GithubService>();
         services.AddScoped<IGitHubApi, GitHubApi>();
+        return services;
     }
 
-    public static void RegisterRepositories(this IServiceCollection services)
+    public static IServiceCollection RegisterRepositories(this IServiceCollection services)
     {
         services.AddSingleton<ICacheRepository, DistributedCacheRedis>();
+        return services;
     }
 
-    public static void RegisterOptions(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection RegisterOptions(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<GitHubApiOptions>(configuration.GetSection("GitHubApi"));
+        return services;
     }
 }
