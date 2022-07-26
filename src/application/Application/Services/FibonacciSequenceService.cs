@@ -31,9 +31,9 @@ public class FibonacciSequenceService : IFibonacciSequenceService
         var prevNumber = BigInteger.Parse(await GetFibbonacciNumberAsync(n - 1));
         var prevPrevNumber = BigInteger.Parse(await GetFibbonacciNumberAsync(n - 2));
 
-        var sum = prevNumber + prevPrevNumber;
-        await _cache.AddAsync(key, sum.ToString());
+        var sum = (prevNumber + prevPrevNumber).ToString();
+        await _cache.AddAsync(key, sum);
 
-        return sum.ToString();
+        return sum;
     }
 }
