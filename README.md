@@ -2,6 +2,12 @@ This repository aims to present an implementation of using Redis and Health Chec
 
 ![#](https://github.com/HenrySaldanha/AspNet.Redis/blob/main/images/end-points.png?raw=true)
 
+![#](https://github.com/HenrySaldanha/AspNet.Redis/blob/main/images/health-cheks-ui-success.png?raw=true)
+
+![#](https://github.com/HenrySaldanha/AspNet.Redis/blob/main/images/health-cheks-ui-error.png?raw=true)
+
+![#](https://github.com/HenrySaldanha/AspNet.Redis/blob/main/images/health-cheks-ui-error-json.png?raw=true)
+
 
 # 1. Redis
 You can see more about Redis at https://redis.io/
